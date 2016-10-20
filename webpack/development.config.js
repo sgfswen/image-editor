@@ -4,17 +4,19 @@ const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlug
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const baseConfig = require('./base.config');
 const NODE_PORT = process.env.NODE_PORT || 9000;
+const localAddress = 'http://localhost:' + NODE_PORT;
 
 module.exports = _.assign({}, baseConfig.commons, {
   devtool: 'sourcemap',
   entry: [
-    'webpack-dev-server/client?http://localhost:' + NODE_PORT,
+    'webpack-dev-server/client?' + localAddress,
     'webpack/hot/only-dev-server',
     './src/index',
   ],
   output: {
-    path: path.resolve(__dirname, '..', 'dist'),
+    path: __dirname,
     filename: 'index.js',
+    publicPath: localAddress + '/',
   },
   plugins: baseConfig.plugins.concat([
     new HotModuleReplacementPlugin(),

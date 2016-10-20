@@ -6,7 +6,6 @@ var webpackConfig = require('../webpack.config');
 
 var devServerPort = process.env.NODE_PORT || 9000;
 new WebpackDevServer(webpack(webpackConfig), {
-  publicPath: '/static/',
   historyApiFallback: true,
   hot: true,
   stats: {
