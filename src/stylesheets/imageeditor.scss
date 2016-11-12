@@ -14,11 +14,19 @@ $blue: #1f86fa;
     box-sizing: border-box;
     height: 100%;
   }
+  .preview {
+    background-size: cover;
+  }
+  .uploader {
+    height: 100%;
+    width: 100%;
+  }
   .browse-link {
     text-decoration: none;
     color: $blue;
   }
   .drop-area {
+    overflow: hidden;
     height: 100%;
   }
   .no-image {

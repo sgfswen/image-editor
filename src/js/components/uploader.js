@@ -31,7 +31,7 @@ export default class Uploader extends Component {
 
   handleChange(e) {
     let [selectedFile] = this.fileNode.files;
-    this.props.onSelected && this.props.onSelected(file);
+    this.props.onImageSelected && this.props.onImageSelected(file);
   }
 
   getModeString() {
@@ -78,10 +78,11 @@ export default class Uploader extends Component {
   }
 
   render() {
+    let { noValueBg } = this.props;
     return (
-      <div className={"uploader no-image " + this.props.uploadMode + ' ' + this.state.dropClass}>
+      <div className={"uploader " + (noValueBg ? '' : 'no-image') + this.props.uploadMode + ' ' + this.state.dropClass}>
         <div className={"drop-area"} {...this.getHandlers()}>
-          {this.getModeString()}
+          {noValueBg ? noValueBg : this.getModeString()}
         </div>
         <input type="file" hidden ref={node => this.inputNode = node} onChange={this.handleChange}/>
       </div>
