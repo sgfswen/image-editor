@@ -1,6 +1,6 @@
-const uploadModeMap = ['both', 'drag', 'browser',];
-const componentModeMap = ['editor', 'uploader',];
-const editorModeMap = ['in-place', 'modal',];
+const uploadModeMap = ['both', 'drag', 'browser'];
+const componentModeMap = ['editor', 'uploader', 'both'];
+const editorModeMap = ['in-place', 'modal'];
 
 const propListValidator = (validList, props, propName, componentName) => {
   const propValue = props[propName];
@@ -16,7 +16,14 @@ export const editorModeValidator = propListValidator.bind(null, editorModeMap);
 
 export const targetDimensionValidator = (props, propName, componentName) => {
   const propValue = props[propName];
-  if(props.mode == 'modal' && !propValue) {
-    return new Error(`'${propName}' property is required when 'editorMode' is 'modal'` );
+  if (props.mode == 'modal' && !propValue) {
+    return new Error(`'${propName}' property is required when 'editorMode' is 'modal'`);
+  }
+};
+
+export const valueValidator = (props, propName, componentName) => {
+  const propValue = props[propName];
+  if(props.mode == 'editor' && !propValue) {
+    return new Error(`'value' property is mandatory for 'editor' mode`);
   }
 };

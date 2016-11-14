@@ -7,7 +7,7 @@ export default class Uploader extends Component {
 
   handleClick(e) {
     e.stopPropagation();
-    this.inputNode.click();
+    this.fileNode.click();
   }
 
   handleDragOver(e) {
@@ -25,13 +25,13 @@ export default class Uploader extends Component {
   }
 
   handleDrop(e) {
-    let [file] = e.target.files || e.dataTrasfer.files;
+    let [file] = e.target.files || e.dataTransfer.files;
     this.props.onSelected && this.props.onSelected(file);
   }
 
   handleChange(e) {
     let [selectedFile] = this.fileNode.files;
-    this.props.onImageSelected && this.props.onImageSelected(file);
+    this.props.onImageSelected && this.props.onImageSelected(selectedFile);
   }
 
   getModeString() {
@@ -84,7 +84,7 @@ export default class Uploader extends Component {
         <div className={"drop-area"} {...this.getHandlers()}>
           {noValueBg ? noValueBg : this.getModeString()}
         </div>
-        <input type="file" hidden ref={node => this.inputNode = node} onChange={this.handleChange}/>
+        <input type="file" hidden ref={node => this.fileNode = node} onChange={this.handleChange.bind(this)}/>
       </div>
     );
   }
